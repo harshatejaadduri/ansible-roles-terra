@@ -1,0 +1,26 @@
+    - name: copying files to repos folder
+      ansible.builtin.copy:
+       src: mongodb.repo
+       dest: /etc/yum.repos.d/mongo.repo
+
+    - name: installing mongodb
+      ansible.builtin.dnf:
+       name: mongodb-org
+       state: present
+  
+    - name: enabling and starting Monogod Service
+      ansible.builtin.service:
+        name: mongod
+        state: started
+        enabled: yes
+
+    - name: Changing local host 
+      ansible.builtin.replace:
+        path: /etc/mongod.conf
+        regexp: '127.0.0.1'
+        replace: '0.0.0.0'
+
+    - name: restarting mongodb
+      ansible.builtin.service:
+        name: mongod
+        state: restarted

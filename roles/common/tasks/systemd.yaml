@@ -1,0 +1,14 @@
+ - name: "Copying {{ component }}.service files"
+   ansible.builtin.template:
+      src: "{{ component }}.service.j2"
+      dest: "/etc/systemd/system/{{ component }}.service"
+  
+ - name: Restart service after config changes
+   ansible.builtin.systemd_service:
+    daemon_reload: true
+    
+ - name: "Starting and Enabling {{ component }}"
+   ansible.builtin.service:
+    name: "{{ component }}"
+    state: restarted
+    enabled: yes

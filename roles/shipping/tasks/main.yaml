@@ -1,0 +1,27 @@
+- name: app setup
+  include_role:
+    name: common
+    tasks_from: app-setup
+
+- name: maven setup
+  include_role:
+    name: common
+    tasks_from: maven 
+
+- name: Importing dbs 
+  community.mysql.mysql_db:
+    name: all
+    login_user: root
+    login_password: RoboShop@1
+    login_host: mysql.84dev.store 
+    state: import 
+    target: "{{ item }}"
+  loop:
+  - /app/db/schema.sql
+  - /app/db/app-user.sql              
+  - /app/db/master-data.sql
+
+- name: systemd_service
+  include_role:
+    name: common
+    tasks_from: systemd
