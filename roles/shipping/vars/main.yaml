@@ -1,2 +1,2 @@
-CART_HOST:  cart.84dev.store
-MYSQL_HOST: mysql.84dev.store
+CART_HOST:  "cart-{{ env }}.84dev.store"
+MYSQL_HOST: "mysql-{{ env }}.84dev.store"
