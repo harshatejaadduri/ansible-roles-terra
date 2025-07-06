@@ -1,2 +1,2 @@
 REDIS_HOST: "redis-{{ env }}.84dev.store"
-CATALOGUE_HOST: "catalogue-{{ env }}.84dev.store"
+CATALOGUE_HOST: "catalogue.backend-{{ env }}.84dev.store"
